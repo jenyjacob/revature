@@ -1,0 +1,93 @@
+﻿Week 3 curriculum
+
+new in HTML5 - added elements and APIs for audio/video/flash-game-type content and removed the plugins that were previously needed for this. because these plugins were a security risk, this change improved security.
+
+HTML Fundamentals (Elements, Attributes, Doctype, Accessibility, Microdata, Semantic-Web)
+    * Elements are created using tags <></>
+      The HTML <html> element represents the root (top-level element) of an HTML document, so it is also referred to as the root element. All other elements must be descendants of this element.
+      https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+    * Attributes - Elements in HTML have attributes; these are additional values that configure the elements or adjust their behavior in various ways. Attributes have values denoted by ="[name of value]" (<img src="..." width="300px" height="520px class="mycssclass">)
+      https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
+    * In HTML, the doctype is the required "<!DOCTYPE html>" preamble found at the top of all documents. Its sole purpose is to prevent a browser from switching into so-called “quirks mode” when rendering a document; that is, the "<!DOCTYPE html>" doctype ensures that the browser makes a best-effort attempt at following the relevant specifications, rather than using a different rendering mode that is incompatible with some specifications.
+
+Multimedia (Audio, Canvas, Video)
+    * <audio src="path/myAudio.extensiontype"></audio>
+    * <canvas></canvas>
+    * <video><source></source></video> (embedded <iframe>)
+    * should consider end users' browser support, compatibility to file format and download rate. can provide link to multimedia if not supported.
+Forms (Input, Validation)
+    <form>
+        <input> (note no closing tag)
+    </form>
+CSS Fundamentals (Rule, Property, Cascade, Inheritance, Box-Model, Media-Queries, Positioning, Responsive-Design, Rulesets, Values-Color, Values-Size, External, Internal, Inline)
+    * The Cascade = a set of rules that determines which rule overrides another rule
+        1. !important rules win
+        2. author styles beat user-agent styles
+        3. specificity:
+            1. more ID selectors wins
+            2. more class selectors wins
+            3. more tag selectors wins
+        4. source order = whichever was defined last wins
+    * Inheritance = 
+Selectors (Class, Id, Omni, Parent-Child, Parent-Descendant, Pseudo-Classes, Pseudo-Elements, Sibling, Tag)
+    * Class - a global attribute is a space-separated list of the classes of the element. Classes allow CSS and Javascript to select and access specibm  fic elements via the class selectors or functions like the DOM method document.getElementsByClassName.
+      multiple different tags can use the same class attribute. css selects a class attribute with a .
+    * Id - The id global attribute defines an identifier (ID) which must be unique in the whole document.
+      the reason for using an id is similar to a class, but only one tag in the entire document may use the id.
+      css selects an id attribute with a #
+    * Parent-Child (denoted a > b) - The child combinator (>) is placed between two CSS selectors. It matches only those elements matched by the second selector that are the children of elements matched by the first.
+      For example div > p means only select p tags inside of div tags
+      <div>
+        <p></p>
+      <div>
+    * Parent-Descendant (denoted with a space) selects both the parent and the child
+      For example html body selects and applies css to both the html and body tags.
+    * Pseudo-Classes (denoted with a :) - In CSS, a pseudo-class selector targets elements depending on their state rather than on information from the document tree.
+      For example, the selector a:visited applies styles only to links that the user has already followed.
+    * Pseudo-Elements - In CSS, a pseudo-element selector applies styles to parts of your document content in scenarios where there isn't a specific HTML element to select. For example, rather than putting the first letter of each paragraph in its own element, you can style them all with p::first-letter.
+    * Sibling - <body>
+                  <div> // this div is a child of the body
+                    <p></p>   // this p is a child of the div
+                    <p></p>   // this p is also a child of the div and a sibling of the other p tag
+                  </div>
+                  <div> // this div is also a child of the body and a sibling of the other div tag
+                  </div>
+                </body>
+MVC Concepts (Model, View, Controller)
+    https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-2.2
+    * The Model in an MVC application represents the state of the application and any business logic or operations that should be performed by it.
+    * Views are responsible for presenting content through the user interface.
+    * Controllers are the components that handle user interaction, work with the model, and ultimately select a view to render.
+Request Lifecycle (DNS, Response, Request)
+Controller (Actions, HTTP Verbs)
+    * Have the controller put the dynamic data (parameters) that the view template needs in a ViewData dictionary that the view template can then access.
+Model (Data-Annotations, ViewModel)
+    * Data-Annotations used with models to govern/protect model data.
+View (Partial-Views, Strongly-Typed, Weakly-Typed, Layout, Razor, ViewData, ViewBag, TempData)
+    * Layout provides an entry point to the page and reduces code redundancy. All the partial views get rendered by the call to rederview in the layout body.
+    * Razor - The template rendering engine by ASP.NET that can combine C# and web development code.
+    * ViewData - Views that are shared among controllers and only last as long as the lifetime of the request.
+    * TempData - A property that stores data until it's read.
+Routing (Global, Controller, Action, Parameter-Route, Parameter-Query)
+    global/controller/action/?parameter=
+    * Routing = rules for deciding which controller (and which of its action methods) will be called to handle a particular request, based on the URL.
+Validation (Server, Client, CSRF, Anti-Forgery)
+    * Server side validation is done when the request reaches the server. Often used alongside anti-forgery, it can protect against a malicious user who tries to submit unintended data into your database.
+    * Client side validation provides the user with information before they submit the request, such as with incorrect input.
+Testing (Behavior Driven Development, Mock, Acceptance-Testing)
+Filters (Action, Authorization, Custom, Exception, Response)
+    * Filters in ASP.NET Core allow code to be run before or after specific stages in the request processing pipeline.
+    https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.2
+    * Action filters can run code immediately before and after an individual action method is called. They can be used to manipulate the arguments passed into an action and the result returned from the action. Action filters are not supported in Razor Pages.
+    * Authorization filters run first and are used to determine whether the user is authorized for the request. 
+    * Custom filters can be created to handle cross-cutting concerns. Examples of cross-cutting concerns include error handling, caching, configuration, authorization, and logging. Filters avoid duplicating code.
+    * Exception filters are used to apply global policies to unhandled exceptions that occur before anything has been written to the response body.
+    * Result filters can run code immediately before and after the execution of individual action results. They run only when the action method has executed successfully.
+Helpers (Custom, HTML, Tag)
+    * https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-2.2
+Model Binding
+    * All the data you use to render the view can only be from one model.
+Entity Framework (Code-First Approach)
+    * Using scaffolding to create the database on SQL Server from C# code.
+Dependency Injection (Singleton, Scoped, Transient, From-Services)
+    * A singleton is instantiated once and then gets passed in for everything no longer getting updated.

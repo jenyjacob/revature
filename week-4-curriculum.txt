@@ -1,0 +1,99 @@
+Week 4 curriculum
+
+Version control (Git)
+    branches (remote, remote tracking, local tracking, local)
+        branches are pointers to commits in Git
+
+    merging (fast forward, non-fast-forward, merge resolution)
+    feature branch workflow
+
+Software development lifecycle (SDLC) - a process for planning, creating, testing, and deploying software. There are usually six stages in this cycle: analysis, design, development and testing, implementation, documentation, and evaluation.
+    Waterfall, V-Model, Agile, scrum, kanban
+        Waterfall - a highly planned-out in advance, hierarchical style of programming in which you must complete one stage before moving onto the next, without going back. this provides higher accountability and security, but lacks in speed and flexibility
+            gather the requirements from the client and stick to them as strictly as possible, the requirements cannot change or should only change in the most extreme of circumstances.
+            design, write, test, deploy
+            any code where human safety is a concern will almost certainly the waterfall design.
+        V-model - build in a top-down manner, and test it in a bottom-up, repeatable
+            validation - unit, integration, system, and acceptance testing
+        Agile - constant communication with the client, showing the client the product and receiving their feedback, each team member works on a different user story independently which allows the team to produce code more quickly
+        Scrum - a point-based system with fast development that has accountability and ability to adapt to changes, also time is set aside to re-evaluate efforts and frequent client/user feedback is gathered to make sure they're happy.
+        Kanban - continuous
+        CMMI, capability maturity model integration - (accountability & quality) a process model that provides a clear definition of what an organization should do prioritizing performance over all
+        Iterative model
+            Spiral - repeatable v-model
+            Big bang (not actually an official model) requirements design? build test? deploy (and hope it works)
+
+Scrum
+    user story, sprint, effort, capacity, velocity, standup
+        user story - a requirement set by the client
+        Sprints - have a goal of completing user stories within a timeframe, sprint planning is in order to estimate how much work it will take to tackle each user story
+        capacity - how many people will be working? what is their availability? how many total points (user stories) can we get through as a team?
+        velocity - how many effort points did we actually gain? what did we actually accomplish since the last sprint?
+        daily standup - hopefully takes only 15 mins at most, everybody has their chance to speak, usually while standing up
+            1. what was i working on since last standup and what did i get done?
+            2. what will i do until the next standup?
+            3. reveal any blockers that i might have, a blocker is something that is someone elses responsibility that is preventing me from continuing
+    project board
+        Scrum (or project) board - a physical (or software) board where information is put for anybody who is involved in the project to look at and reference. the scrum master makes sure the scrum board is up-to-date.
+
+DevOps
+    culture, continuous integration/delivery/deployment, build pipeline
+        culture is 
+        continuous integration is committing changes to a source/code repo (git) as frequently as possible, and within minutes of code being pushed to the repo it's pushed to the dev server.
+        continuous delivery is where manual approval is the only thing between the master branch and the users, everything else is automated.
+        continuous deployment is 100% automated. once the code is pushed to the master branch, the users can already see the changes.
+        build pipeline is prepare, analyze, publish.
+
+Cloud Computing 
+    on-premises, cloud, hybrid cloud, multi cloud
+        on-premise - servers that you own are on site/premise
+        cloud means on the internet, cloud computing means remotely connecting to a server on the internet that you may or may not own
+        hybrid cloud - a combination of local storage and using a cloud provider
+        multi cloud - using multiple cloud providers
+    IaaS, PaaS, SaaS, CaaS (everything runs on some kind of server, the question is how much control does the user have over it)
+        Infrastructure as a Service (IaaS) provides a service that requires physical resources, (VM, disk/storage, networking, electricity)
+        Platform as a Service (PaaS) is a middleground that provides a resource while also having a web app, Azure App Service and Azure DevOps as examples
+        Software as a Service (SaaS) we don't worry about the hardware or the technology it's implemented with, all we care about is it has some kind of interface on the web browser or some kind of functionality, like an API, as a service
+        Container as a Service (CaaS) i.e. Azure Kubernates Services
+    AWS, Azure, Google Cloud (are examples of Cloud Providers)
+    some advantages/conveniences of cloud computing are the ease of scaling and paying for what you need
+
+Azure
+    VM, SQL DB, App Service
+    Storage
+    Active Directory, Cosmos DB, AKS
+        Active Directory - A Microsoft product that consists of several services that run on Windows Server to manage permissions and access to networked resources. The main service in Active Directory is Domain Services (AD DS), which stores directory information and handles the interaction of the user with the domain.
+        Cosmos DB - also owned by Microsoft, enables you to build highly responsive and highly available applications worldwide. Cosmos DB transparently replicates your data wherever your users are, so your users can interact with a replica of the data that is closest to them.
+        AKS - Azure Kubernates Services
+
+.NET deployment
+    publish, local IIS, Azure App Service
+        Azure App Service - quickly build, deploy, and scale web apps created with popular frameworks .NET, .NET Core, Node.js, Java, PHP, Ruby, or Python, in containers or running on any operating system. Meet rigorous, enterprise-grade performance, security, and compliance requirements by using the fully managed platform for your operational and monitoring tasks.
+
+Azure DevOps
+    Pipelines, build, release, YAML, job, step, GitHub Check
+
+Code analysis
+    static analysis, SonarCloud, technical debt, configuration, quality profile, quality gate
+        Static analysis helps detect and therefore prevent duplicate code
+        a quality gate is an acceptability metric of code coverage
+
+Docker
+    VM vs. container, daemon/client, Docker Machine
+        virtual machine (VM) is an operating system installed on an existing one
+        docker's job is to run one process in an environment and look like it's the only process running on the operating system
+    container, image, Dockerfile, registry
+        containers only use the memory and cpu that they need, unlike a VM that have their resources partitioned and are static for the lifetime of the vm
+        a container is a running instance of an application inside docker and every container is an instance of an image
+        A Dockerfile contains docker commands that are used to build an image.
+    CLI commands, Dockerfile commands
+        FROM sets the base image to use for the subsequent instructions to follow
+        COPY copies files from outside the image into the image
+        WORKDIR sets the destination directory location
+        CMD sets the default command to run when the container starts from the image
+        RUN executes raw (linux) terminal commands
+        ENTRYPOINT similar to CMD except that it can be used for library access and other outside resources. a path must be provided when using ENTRYPOINT.
+        ARG The ARG instruction defines a variable that users can pass at build-time to the builder with the docker build command using the --build-arg <varname>=<value> flag. think main(string[] args)
+        ENV The ENV instruction sets the environment variable <key> to the value <value>. The environment variables set using ENV will persist when a container is run from the resulting image.
+        EXPOSE deploying your app to a specific port.
+

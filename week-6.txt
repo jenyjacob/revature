@@ -1,0 +1,161 @@
+Week 6 curriculum
+
+JavaScript
+    XSS - Cross-site scripting - A type of computer security vulnerability typically found in web applications. XSS enables attackers to inject client-side scripts into web pages viewed by other users.
+    DOM - Document Object Model - A cross-platform and language-independent interface that treats an XML or HTML document as a tree structure wherein each node is an object representing a part of the document. The DOM defines a standard for accessing documents. With the object model, JavaScript gets all the power it needs to create dynamic HTML.
+        A few methods JavaScript can use to manipulate the DOM:
+            document.getElementById, document.querySelector, document.querySelectorAll, innerHTML, document.createElement, document.appendChild
+    Ajax - short for asynchronous JavaScript and XML is a set of web development techniques using many web technologies on the client side to create asynchronous web applications. With Ajax, web applications can send and retrieve data from a server asynchronously (in the background) without interfering with the display and behavior of the existing page.
+        XmlHttpRequest - https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+            Use XMLHttpRequest (XHR) objects to interact with servers. You can retrieve data from a URL without having to do a full page refresh. This enables a Web page to update just part of a page without disrupting what the user is doing.
+            A few common XMLHttpRequest methods and properties:
+                onreadystatechange, readyState, status, responseText
+        Fetch API - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+            The fetch() method takes one mandatory argument, the path to the resource you want to fetch. It returns a Promise that resolves to the Response to that request, whether it is successful or not.
+            The then() method returns a Promise. It takes up to two arguments: callback functions for the success and failure cases of the Promise.
+        CORS - Cross Origin Resource Sharing
+            A mechanism that uses additional HTTP headers to tell a browser to let a web application running at one origin (domain) have permission to access selected resources from a server at a different origin.
+            One can implement by adding services.AddCors and app.UseCors to their startup file.
+        Promises - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+            An object that represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
+    events
+        event listeners
+            An interface representing an object that can handle an event dispatched by an EventTarget object.
+            The EventTarget method addEventListener() sets up a function that will be called whenever the specified event is delivered to the target. Common targets are Element, Document, and Window, but the target may be any object that supports events (such as XMLHttpRequest).
+        propagation - Any event that happens on an HTML elements, its parent and its parent's parent will listen for that event.
+            bubbling - The default behavior for an event listen
+            capturing - A Boolean indicating that events of this type will be dispatched to the registered listener before being dispatched to any EventTarget beneath it in the DOM tree.
+
+Node - (Node.js) - a JavaScript run-time environment that can execute server-side JavaScript code.
+    NPM - Node Package Manager
+        The default package manager for Node.js. npm makes it easy for JavaScript developers to share and reuse code, and makes it easy to update the code that you’re sharing, so you can build amazing things.
+        A few common npm command line commands:
+            npm init (creates the package.json file)
+            npm install (-g) [package] (--save)
+                -g is an optional flag that allows installation of a package without a package.json being present
+                --save is an optional flag that adds the package to your package.json as a dependency
+    npm CLI - commands that can be executed from the npm command line
+
+    package.json:
+        lists the packages your project depends on
+        specifies versions of a package that your project can use using semantic versioning rules
+        makes your build reproducible, and therefore easier to share with other developers
+    scripts - found in the package.json, that contains additional npm commands
+    semver - semantics version, follows the format of major.minor.bug e.g. 3.2.5
+
+
+TypeScript - A strict syntactical superset of JavaScript that transcompiles into JavaScript.
+    type annotations
+    interfaces - basically our object model,
+    classes - inherits properties from our interface
+    modules - https://www.typescriptlang.org/docs/handbook/modules.html
+        import & export
+    transpilation - How the TypeScript source code gets converted to JavaScript source code.
+    tsc - command used to compile typescript into javascript
+    tsconfig.json - Specifies the root files and the compiler options required to compile the project including which modules to import and export
+
+
+Webpack - a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph which maps every module your project needs and generates one or more bundles.
+    the webpack command creates your bundle.js.
+    module bundler - a tool that takes pieces of JavaScript and their dependencies and bundles them into a single file
+    webpack.config.js - a file that keeps track of:
+        Entry, Output, Loaders, Plugins, Mode, Browser Compatibility
+
+
+Angular - Angular apps are modular and Angular has its own modularity system called NgModules.
+    module - NgModules are containers for a cohesive block of code dedicated to an application domain, a workflow, or a closely related set of capabilities. They can contain components, service providers, and other code files whose scope is defined by the containing NgModule. They can import functionality that is exported from other NgModules, and export selected functionality for use by other NgModules.
+        root module - Every Angular app has at least one NgModule class, the root module, which is conventionally named AppModule and resides in a file named app.module.ts. You launch your app by bootstrapping the root NgModule.
+        NgModule decorator - The @NgModule() decorator is a function that takes a single metadata object, whose properties describe the module.
+    component - A component controls a patch of screen called a view.
+        Component decorator - The @Component decorator identifies the class immediately below it as a component class, and specifies its metadata. A component is not a component until you mark it as one with the @Component decorator.
+        template syntax
+            A template looks like regular HTML, except that it also contains Angular template syntax, which alters the HTML based on your app's logic and the state of app and DOM data.
+            Your template can use data binding to coordinate the app and DOM data, pipes to transform data before it is displayed, and directives to apply app logic to what gets displayed.
+    directives
+        attribute (ngClass, ngStyle, custom) - Attribute directives alter the appearance or behavior of an existing element. In templates they look like regular HTML attributes, hence the name.
+        structural (ngFor, ngIf, ngSwitch) - Structural directives alter layout by adding, removing, and replacing elements in the DOM.
+        components - A component is technically a directive. However, components are so distinctive and central to Angular applications that Angular defines the @Component() decorator, which extends the @Directive() decorator with template-oriented features.
+    data binding
+        data binding (interpolation, property binding, event binding, two-way binding, NgModel)
+    service - Service is a broad category encompassing any value, function, or feature that an app needs. Angular distinguishes components from services to increase modularity and reusability.
+        Injectable decorator - To define a class as a service in Angular, use the @Injectable() decorator to provide the metadata that allows Angular to inject it into a component as a dependency. Similarly, use the @Injectable() decorator to indicate that a component or other class (such as another service, a pipe, or an NgModule) has a dependency.
+    HttpClient
+        The HttpClient in @angular/common/http offers a simplified client HTTP API for Angular applications that rests on the XMLHttpRequest interface exposed by browsers.
+        Additional benefits of HttpClient include testability features, typed request and response objects, request and response interception, Observable apis, and streamlined error handling.
+    jasmine is the library that provides functions like describe, it, and expect to write unit tests with.
+    karma is a program ("test runner") that can take tests written with jasmine or many other libraries, and run them in real browsers (as opposed to fake browser-like environments) that karma tries to launch and manage.
+    ng CLI - The Angular CLI is a command-line interface tool that you use to initialize, develop, scaffold, and maintain Angular applications.
+        First you must install the CLI using the npm package manager: npm install -g @angular/cli
+        A few common CLI command line commands:
+            new -  Creates a new workspace and an initial Angular app.
+            generate - Creates and/or modifies files based on a schematic.
+            build - Compiles an Angular app into an output directory named dist/ at the given output path.
+            serve - Builds and runs your app, rebuilding on file changes.
+            lint - Runs linting tools on Angular app code in a given project folder, which checks for formatting.
+    deployment
+
+
+
+From the quiz:
+
+npm uses the package.json to manage what dependencies our application has.
+By default, event handlers are set to the bubbling phase.
+send is the function of the XMLHttpRequest object sends the request to the server.
+XMLHttpRequest is the object is used to make Ajax calls.
+document.getElementById('myform').submit( ) will submit a form using JavaScript.
+The === operator compares value equality as well as data type.
+document.createElement('div') can add new DIV elements dynamically.
+Undeclared is not a JavaScript data type.
+document.getElementById("demo").innerHTML = "Hello World!"; is the correct JavaScript syntax to change the content of the HTML element.
+The HTML DOM is an object based interface that allows JavaScript and other entities manipulate and create HTML elements dynamically.
+You are allowed to have more than one script tag on the page for multiple JavaScript references.
+<script src="my.js"> is the correct syntax for referring to an external script called "my.js".
+After defining an object you can still add properties to it.
+getElementsByTagName() method is the best method to use if you want to grab all paragraphs on the page.
+A callback function is a function that is an argument of another function that is typically executed before returning.
+The number -1000, is considered truthy
+Controllers are NOT constructs supported in Angular 2.
+Angular 2 supports TypeScript.
+The AppComponent is typically the name for an Angular 2 application's root component.
+The main.ts file provides compilation information for an Angular2 application.
+The app.module.ts file is typically used to link your application's components.
+Data-binding is the association of data/events with elements and user interactions.
+Directives are elements, attributes and CSS style classes that you bind on your HTML templates.
+A Component is a specialized Directive.
+A template is NOT a collection of data values you pass to a component. Actually a template is HTML code mixed with Angular constructs. It defines the view of your application. Metadata is considered to be a collection of data values passed to a component.
+Services are features or values that you want defined in one location but in general are used throughout your application.
+You typically define one root module and typically define additional features of your application as other modules tied into your root module.
+Interpolation is a way to display data from your Angular code on your templates.
+{{}} is the best way to use interpolation.
+@NgModule is the decorator used to specify metadata for the root module.
+Declarations and imports are properties used to specify on @NgModule.
+Components are specified as part of the declarations property of @NgModule.
+Other modules are specified as part of the imports property of @NgModule.
+Angular will match the selector property of the root component to an element in index.html during the bootstrapping process.
+Which of the following directives do you need to perform two-way data-binding? <input [(ngModel)]="person.name" />
+You can use interpolation to set the value of a property this is a string datatype. Interpolation is used only for string-based values. Use property-binding for other datatypes.
+Which of the following correctly uses property binding? <img [src]="value" />
+Event-binding associates DOM events to component functions.
+Which of the following snippets correctly uses event-binding according to Angular 2 syntax? <button (click)="func">
+@Directive is used for creating custom directives.
+ngModel, ngClass, and ngStyle are examples of attribute directives.
+ngIf does NOT remove the element from the DOM if the expression evaluates to false. ngIf will toggle an element's existence in the DOM based on the boolean value of the expression.
+ngClass is used to manipulate multiple pre-defined classes at once.
+Selector, template, animations, templateUrl are all valid properties of the @Component decorator.
+<script> tags and <html> tags are NOT permitted within Angular 2 Templates.
+You CAN, indeed, use a service within another.
+A Route is a path and an associated component.
+Which of the following snippets correctly defines a Routes object that associates /path to PageComponent? const routes: Routes = [{path: 'path', component: PageComponent}];
+RouterModule.forRoot(routes) is the method you call to configure the routes in your application with the module.
+RouterOutlet is the directive used to specify the location of routable content to display.
+A routerLink can NOT be used to navigate to external URLs or websites outside of the current application.
+A component is an important feature in Angular 2. You'll find that many constructs in Angular 2 are referred to as Components. There is a special decorator that you'll have to use, @Component, even when creating a component.
+Modules are used to organize code in features or related functionality in order to prevent code bloat and promote code reuse.
+A Logging Service is a type of feature that may be injected into another class.
+The root module does not necessarily need to be named AppModule. It is a convention to use AppModule, but Angular2 doesn't require it.
+Two-way Data-binding is like property-binding and event-binding together.
+Bootstrapping is the process during which your Root Component is inserted into the DOM.
+Which of the following correctly binds the input element to the property person.name? <input [(ngModel)]="person.name" />
+Given the following snippet: <h1>Hello {{name}}</h1><div #myDiv>This is a sentence</div><p>{{myDiv.innerHTML}}</p>, #myDiv is the template reference variable.
+Property binding is the type of binding that utilizes a single set of square brackets.
+

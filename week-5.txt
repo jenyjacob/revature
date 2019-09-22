@@ -1,0 +1,192 @@
+Week 5 curriculum
+
+service-oriented architecture (SOA) (layered architecture represents a business logic layer and that refrences a data access layer which gathers things from the database, it's hierarchal)
+splits up an application into modules
+service-oriented architecture tries to make the business logic layer not depend on the data access layer or the UI
+web service exposes some kind of interface that receives messages and sends a response back
+remote procedure call (RPC) reflects the awareness of the implementation, call a method with these parameters (tightly coupled way, no abstraction)
+    gRPC is the library people use to do that
+SOAP is done with WCF (Windows Communication Foundation)
+    WCF has kind of been deprecated, it will be left behind with .NET Framework
+REST is done with ASP.NET
+flexibility - don't all need to have the same runtime environment (interoperability)
+    patterns - flexibility, availability, and scalability.
+    principles (https://en.wikipedia.org/wiki/Service-orientation_design_principles)
+        Standardized Service Contract - Services adhere to a service description. A service must have some sort of description which describes what the service is about. 
+        Loose Coupling – Less dependency on each other. This is one of the main characteristics of web services which just states that there should be as less dependency as possible between the web services and the client invoking the web service.
+        Service Abstraction - Services hide the logic they encapsulate from the outside world. The service should not expose how it executes its functionality; it should just tell the client application on what it does and not on how it does it.
+        Service Reusability - Logic is divided into services with the intent of maximizing reuse.
+        Service Autonomy - Services should have control over the logic they encapsulate.
+        Service Statelessness - Ideally, services should be stateless. This means that services should not withhold information from one state to the other.
+                                An example can be an order placed on a shopping site. Now you can have a web service which gives you the price of a particular item.
+                                But if the items are added to a shopping cart and the web page navigates to the page where you do the payment, the responsibility of the price of the item to be transferred to the payment page should not be done by the web service.
+                                Instead, it needs to be done by the web application.
+        Service Discoverability - Services can be discovered.
+        Service Composability - Services break big problems into little problems. One should never embed all functionality of an application into one single service but instead, break the service down into modules each with a separate business functionality.
+        Service Interoperability - Services should use standards that allow diverse subscribers to use the service. In web services, standards as XML and communication over HTTP is used to ensure it conforms to this principle.
+    endpoint - one end of a communication channel
+    address is the URL
+    binding refers to what transport protocol, HTTP TCP/UDP, SMTP
+    contract something that both client and service agree upon. eg. will only use the services that web service provides via WSDL. interface is a service contract.
+
+
+SOAP is a protocol that takes a request (get or post) or a reponse, in XML format, and basically wraps it in an envelope before sending it
+    envelope is the entire response, and is the root element
+    header is the top element of the envelope, contains meta data and the URI
+    body element contains all other data
+    XML is the format the envelope uses. XML is a file type that can be read by any programming language.
+    XML Schema is a structure to an XML file that defines its elements and attributes
+    WSDL (Web Services Description Language) is an XML-based file which basically tells the client application what the web service does. It is known as the Web Services Description Language(WSDL). WCF generates the WSDL.
+    A web service is an important component in building modern day web applications. Their main purpose is to allow multiple applications built on various programming languages to talk to each other. For instance, we can have a .Net web application that talks to a Java application via a Web service.
+        (https://download.oracle.com/otn_hosted_doc/jdeveloper/1012/web_services/ws_wsdlstructure.html)
+        (https://www.guru99.com/wsdl-web-services-description-language.html)
+        port - Specifies a single endpoint as an address for the binding, thus defining a single communication endpoint.
+        binding - Describes how the operation is invoked by specifying concrete protocol and data format specifications for the operations and messages.
+        portType - An abstract set of operations supported by one or more endpoints. The <portType> tag is used to encapsulate every input and output message into one logical operation.
+        operation - An abstract description of the action supported by the service.
+    implementation
+        WCF, attributes
+        Web Service (capital W capital S refers specifically to SOAP)
+
+
+        Web API" is the old name for doing REST API in ASP.NET. it used to be we had "ASP.NET MVC" and "ASP.NET Web API", with more differences between them. in .NET core, things were unified under the MVC way of doing things - and "ASP.NET Core Web API" isn't really a thing. but people still say "Web API
+        
+
+REST (Representational State Transfer) is a philosophy of web services, check out Roy Fielding's belief of rest (https://martinfowler.com/articles/richardsonMaturityModel.html)
+    uniform interface
+        Resource identification in requests - Individual resources are identified in requests, for example using URIs in RESTful Web services. The server could send data from its database as HTML, XML or as JSON—none of which are the server's internal representation.
+        Resource manipulation through representations - When a client holds a representation of a resource, including any metadata attached, it has enough information to modify or delete the resource.
+        Self-descriptive messages - Each message includes enough information to describe how to process the message. For example, which parser to invoke can be specified by a media type.
+        Hypermedia as the engine of application state (HATEOAS)
+            A component of the REST application architecture that distinguishes it from other network application architectures.
+            A client interacts with a network application whose application servers provide information dynamically through hypermedia.
+            A REST client needs little to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia.
+            YouTube is a good example of HATEOS, the client shouldn't have to remember the exact URL, instead the client provides a search string and the server provides the hypermedia.
+    client-server - The principle behind the client-server constraints is the separation of concerns. Separating the user interface concerns from the data storage concerns improves the portability of the user interfaces across multiple platforms.
+    stateless - The client-server communication is constrained by no client context being stored on the server between requests. Each request from any client contains all the information necessary to service the request, and the session state is held in the client.
+    cacheable - As on the World Wide Web, clients and intermediaries can cache responses. Responses must therefore, implicitly or explicitly, define themselves as cacheable or not to prevent clients from getting stale or inappropriate data in response to further requests.
+    layered - A client cannot ordinarily tell whether it is connected directly to the end server, or to an intermediary along the way. This means that the client doesn’t know if it’s talking with an intermediate or the actual server. So if a proxy or load balancer is placed between the client and server, it wouldn’t affect their communications and there wouldn’t be necessities to update the client or server code.
+    code-on-demand - Servers can provide executable code to the client.
+    HTTP
+        methods, aka verbs, are your type of requests, get (read), post (create), put (edit/update), delete (destroy)
+            full list @ (https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+        safe - changes no visible state, read-only access, cacheable. get requests are safe.
+        idempotent - an operation that regardless of how many times you make the operation, the overall effect on the state will be the same. put and delete must be idempotent. post is not idempotent.
+        status codes are values between 100-599 that's included with a response
+            full list @ (https://developer.mozilla.org/en-US/docs/Web/HTTP/status)
+            100-199 informational, 100 = continue
+            200-299 indicates success
+                200 = OK (typical response to get requests) *
+                201 = created (typical response to post requests) *
+                202 = accepted (used for long running server side operations because http requests expect responses right away, but server is unsure if request succeeded or failed yet)
+                204 = no content (response for put and delete requests without a body) *
+            300-399 redirection
+                301 = moved permanently
+                302 = moved temporarily, but found *
+                304 = not modified
+            400-499 client side error
+                400 = bad request *
+                401 = unauthenticated (typically trying to access a resource while not logged in) *
+                402 = payment requirement
+                403 = forbidden (unauthorized), user is logged in but does not have permission to view *
+                404 = not found *
+                405 = method not allowed (for example, server might not allow delete requests)
+                406 = not acceptable (typically content-type mismatch [xml/json]) * 
+                418 = i'm a teapot
+            500-599 server side error
+                500 = internal server error * 
+                501 = not implemented (under construction)
+                502 = bad gateway (server requires communication with an outside resource or another server that isn't responding) *
+        request headers
+        response headers
+    implementation - the how to part of making a RESTful web service
+        ASP.NET Core
+        HttpClient - Provides a base class for sending HTTP requests and receiving HTTP responses from a resource identified by a URI.
+        (https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netcore-2.2)
+            GetAsync Method - Send a GET request to the specified Uri as an asynchronous operation.
+            (https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.getasync?view=netcore-2.2)
+        JSON - JavaScript Object Notation - an open-standard file format that uses human-readable text to transmit data objects consisting of attribute–value pairs and array data types (or any other serializable value). It is a very common data format used for asynchronous browser–server communication, including as a replacement for XML in some AJAX-style systems.
+        XML - Extensible Markup Language - a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable.
+        Content negotiation refers to mechanisms defined as a part of HTTP that make it possible to serve different versions of a document (or more generally, representations of a resource) at the same URI, so that user agents can specify which version fits their capabilities the best. One classical use of this mechanism is to serve an image in GIF or PNG format, so that a browser that cannot display PNG images (e.g. MS Internet Explorer 4) will be served the GIF version.
+        IActionResult types (https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/actions?view=aspnetcore-2.2)
+            when a controller method, which is of type IActionResult, returns View() or Ok(), it will convert into an HttpRequest
+        custom formatter
+
+
+security
+    authentication is being able to prove your identity
+    authorization is having permission to do whatever you're trying to do
+    XSS - Cross-site scripting - A type of computer security vulnerability typically found in web applications. XSS enables attackers to inject client-side scripts into web pages viewed by other users.
+
+
+JavaScript is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.
+While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.
+JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles.
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+    ES5 - ECMAScript version 5 (baseline for all modern browsers)
+    ES6 - ECMAScript version 6 (aka ES2015) is the current version, 98% of modern browsers support it
+        new features in ES6: (http://es6-features.org/#Constants)
+            const - the value of the data does not change
+            block scope (let) - in JS a variable declared inside a code block keeps its value outside of the code block, this is known as "hoisting", unless it's declared with let instead of var
+                let allows you to declare variables that are limited to a scope of a block statement, or expression on which it is used, unlike the var keyword, which defines a variable globally, or locally to an entire function regardless of block scope.
+            arrow functions (=>)
+                this
+            method syntax for function properties
+            default parameters
+            string interpolation `-- ${x} --` backtick (`) shares the same key as tilde (~)
+            classes with constructors, inheritance
+            symbol type
+            various useful built-in functions like string searching
+            Promises
+            es6 modules (import, export)
+            Set and Map data structures
+            for of - JS version of C#'s foreach loop, not to be confused with JS's forEach (capital E) loop which takes a function as an argument
+            getters/setters
+            internationalization features (number/date/currency format)
+            spread, destructuring
+    types - JS is weakly/loosely-typed meaning variables don't have types, but values themselves do have types. Any variable can contain any value.
+        There are 7 types in JavaScript ES6:
+            The default value of a new variable is undefined, which means doesn't have a value.
+            Null is its own type with only one possible value, null, which represents any kind of missing value.
+            Number - any number whether whole or decimal. e.g. 1, 1.5, Infinity, and NaN are all considered number in JS.
+            Boolean - true or false
+            String - 'a sequence of characters'
+                string interpolation syntax aka template literals
+                x = `backtick string new in ES6 ${12 + 3}` (note the use of `` to surround the string)
+            Object - follows JSON format, var x = { 'name': 'nick' }, arrays and functions are also typeof object
+            Symbol - added in ES6
+    scopes - global and block
+            block scope is the scope of a variable that's declared inside of {} such as a function, if statement, or loop
+        there is also "hoisting" which is even if a variable is declared within a block scope, it's still declared as if it were declared globally
+        strict mode prevents this
+    truthy/falsy
+        false, 0/-0, NaN, null, undefined, "" are all falsy (returns false)
+        everything else is truthy (returns true), this includes any number that isn't zero, any string that isn't empty, and any object
+    loose equality
+        == (double equals) [only compares the value, e.g. 3 == "3" will return true], === (triple equals) [compares both the value and the data type, e.g. 3 === "3" will return false]
+            use JS's built in system method isNaN() to check for NaN (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
+    JSON - JavaScript Object Notation, var x = { 'id': '1', 'name': 'nick' }
+    prototypes
+        Prior to ES6, JavaScript didn't have classes.
+        ES6 classes are syntactical sugar to provide a much simpler and clearer syntax to create objects and deal with inheritance.
+        JavaScript has inheritance without classes, it has prototypal inheritance, which is inheritance from object to object rather than from class to class
+        This exists because property access works in this way.
+        While JavaScript doesn't have classes, it does have constructors. To create an object from a constructor, use "new".
+    functions
+        arrow - similar to C# lambda
+            divide = (a, b) => a/b // arrow notation
+            function divide(a, b) { return a/b } // regular way, but both methods do the same thing
+        callback
+            when you pass a function as a parameter - a great example of this is JS's built-in forEach function (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+        closure
+            In JS, functions "close over" any variables they reference, keeping them alive even if they would normally be out of scope and removed from memory.
+            Another way to describe closure is it's the behavior where an inner (nested) function keeps the value of a variable that was declared in the outer function.
+        IIFE - immediated-invoked function expression
+            encapsulates some code to run right away and disposes the variables in it once it's done
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    DOM
+    Ajax - requests to web services from JavaScript
+        XmlHttpRequest, Fetch API, CORS, Promises
+    events
+        event listeners, propagation, bubbling, capturing

@@ -1,0 +1,176 @@
+Anatomy of Code (Language, Compiler, Runtime, Platform)
+    * Language
+        * high level code that we as humans write in
+    * Compiler
+        * Takes high level code and translates it into intermidiate language like CLI or JRE and then assembly into low level CPU language
+    * Runtime
+        * After compiler compiles code the code can run. During execution of the instructions that could result in error. Try/catch statements and exceptions.
+    * Platform
+        * Operating system
+        * .NET?
+
+Environment Setup (IDE, Code Editor, Version Control, Chat)
+    * IDE = Interactive Delevopment Environment (Visual Studio)
+    * Code Editor = Visual Studio Code
+    * Version Control = Git (Centralized [database] and Decentralized)
+    * Chat = Slack
+
+Basic Topics (Core C#, Program Structure, Testing, Logging)
+    * Core C#, .NET core cross platform
+    * Program Structure = namespace -> class -> fields (variable), methods -> code
+    * Testing = make sure code works, expect anything and everything a user could input
+    * Logging = documenting what the code does especially when there is an error, keeping track of the stack's state.
+
+.NET Building Blocks (Framework, Standard, Core, Project, Solution, Assembly, Library, Application)
+    * Framework = Microsoft Windows only, downloaded onto the computer through Windows Updates C#, VB.NET, F#, Python
+    * Standard = we need a standard for every platform so our code can run and compile on different machines
+    * Core = modern cross platform .NET
+
+Common Language Runtime (BCL, CIL, CLI, CLR, CTS, JIT, VES)
+    * BCL = base class libraries (they exist)
+    * CIL = common intermediate language, after the compiler but before the CLR, first step of the CLI
+    * CLI = common language infrastructure, combo of CIL into CLR into machine code
+    * CLR = common language runtime, takes CIL code and converts it to machine code, in our case it's platform specific to .NET, also provides garbage collection
+    * CTS
+    * JIT = java
+    * VES = virtual execution system
+
+Runtime Environment (Garbage Collection, Managed, Unmanaged)
+    * memory management
+        * managed
+            * the CLR does it for you
+        * unmanaged
+            * the developer must manually write the code to manage the memory
+
+Datatypes (Reference, Value)
+    * Reference = location in memory
+    * Value = the actual data the field holds
+
+Access Modifiers (Internal, Private, Protected, Public)
+    * Internal = can only be accessed from within the same project assembly (which might be the namespace)
+    * Private = can only be accessed from within the same class (default)
+    * Protected = kind of like private, but subclasses can access
+    * Public = no restrictions
+
+Extended Modifiers (Abstract, Const, New, Override, Partial, Readonly, Sealed, Static, Virtual)
+    * Abstract classes that cannot be instantiated, only inherited from
+    * Const = value cannot be changed
+    * New = keyword used to instantiate an object from a class
+    * Override = required to extend or modify the abstract or virtual implementation of an inherited method, property, indexer, or event
+    * Partial = two classes with the same name, but dotnet thinks it's the same class.
+    * Readonly = value cannot be changed after being set by the constructor
+    * Sealed = other classes are not allowed to inherit from a sealed class
+    * Static = value is shared between all instances of a class
+    * Virtual = used to modify a method, property, indexer, or event declaration and allow for it to be overridden in a derived class
+
+Class (Constructor, Field, Method, Property, Reference Type)
+    * Constructor = is what is used to actually instantiate an object of a class
+    * Field = aka variable
+    * Method = block of code that does something, if field is a noun, method is a verb.
+    * Property = 
+    * Class is reference type
+
+Struct (Constructor, Field, Method, Property, Value Type)
+    * Struct is a container but there is no inheritance, data type
+
+Interface (Method, Property)
+    * No implementation and no instances
+
+Enum (Collection)
+    * a struct data type used for readability
+
+Semantic Code (DRY, Comments-Inline, Comments-XML, KISS, Separation Of Concerns)
+    * Semantic code means giving meaning to the code you're writing
+    * DRY = Don't Repeat Yourself
+    * Comments-Inline = there should be comments within the code so anyone reading your code can understand what it's doing
+    * Comments-XML = comments in a separate xml document
+    * KISS = Keep It Simple Stupid
+
+Object Oriented Programming (Abstraction, Encapsulation, Inheritance, Polymorphism)
+    * Abstraction
+        * separation between needed functionality & implementation details
+        * generalizing common characteristics of things into reusable definitions
+        * abstract class, interface, class, string, double
+    * Encapsulation
+        * treating groups of related data, behavior, etc. as a single unit
+        * hiding information within objects
+        * class/object, access modifiers
+    * Polymorphism
+        * ability to treat derived-type objects as though they were base-type objects
+        * ability to extend / override existing behavior for new circumstances
+        * method overloading (same name different arguments and/or # of arguments)
+        * method overriding (same name different functionality than parent class)
+        * generics, delegates
+    * Inheritance
+        * ability to derive a new class from another, gaining its data & behavior
+
+Variance (As, Boxing, Casting, Is, Out, Ref, TypeOf)
+    * As = sets a fields to a different data type, or null if it's not compatible
+    * Boxing = hard cast an object to a value type
+    * Casting = 
+    * Is = comparision
+    * Out = almost like ref but it can take an uninitialized variable
+    * Ref = refers to a variables location in memory
+    * TypeOf = operator that returns a fields data type
+
+Collections (Array, List, Data Structures, Dictionary, Generics)
+    * Array = static field of memory, size does not change in runtime
+    * List = dynamic, can change its size during runtime
+    * Data Structures = a container
+    * Dictionary = maps a key to a value, aka HashMap in java
+    * Generics = flexibility for user since data type is not known before runtime
+
+Serialization (File I/O, Regular Expressions, Serializer-JSON, Serializer-Text, Serializer-XML)
+    * File I/O = 
+    * Regular Expressions = regexp?
+    * Serializer-JSON = newtonsoft?
+    * Serializer-Text = 
+    * Serializer-XML = 
+
+Exception Handling (Catch, Custom Exceptions, Finally, Throw, Try)
+    * Catch = code block that executes when the exception is detected
+    * Custom Exceptions
+    * Finally = code block that executes after and regardless of the try/catch outcome
+    * Throw = keyword that forces an exception
+    * Try = code block that executes when an exception is detected, in other words, when the catch code block doesn't run
+
+Test Driven Development (Code-Coverage, Unit-Testing) [writing the tests before the code]
+    * Code-Coverage = % or the degree of the code that has been tested
+    * Unit-Testing = 
+
+Application Debugging (Breakpoints, Debugger, Logging)
+    * Breakpoints
+    * Debugger = Ctrl + click
+    * Logging = keeping track of the bugs
+
+SOLID (Single-Responsibility, Open-Closed, Liskov-Substitution, Interface-Segregation, Dependency-Inversion)
+    * Single-Responsibility = any class or method should have only one responsibility or only one reason to change
+    * open-closed = entities should be open for extension, closed for modification
+    * Liskov-Substitution = objects should be replaceable with instances of their subtypes without breaking the correctness of the Program
+    * Interface-Segregation = prefer many small specific interfaces to few large general-purpose interfaces
+    * Dependency-Inversion = high-level classes should not depend on low-level; both should depend on interfaces
+
+Design Patterns (Creational-Singleton, Creational-Factory)
+    * Creational-Singleton = creating only one object of a class
+    
+Delegates (Action, Event, Function, Lambda, LINQ, Predicate)
+    type safe function points that holds reference to a method
+    functions as a data type
+    action is what happens after a trigger occurs
+    event is something that a listener listens for
+    lambda is declaring a method using =>
+    LINQ is a library of methods of the class type Enumerable https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable?view=netcore-2.2
+    Predicate is a boolean lambda function
+
+Multithreading (Async-Await, Task, Thread)
+    * Async-Await = will wait until resources become available
+    * Task = an instruction that consumes resources, a data type that stores the state of the 
+    * Thread = follows a set of instructions, can either be synchronous or asynchronous
+
+Git (Add, Commit, Log, Pull, Push, Status)
+    * Add = moving changed files to a staging area before commiting them
+    * Commit = actually committing those changes (with a comment) from the staging area to a local repository
+    * Log = documented information of what's happening with the program during runtime
+    * Pull = downloading from the remote repository to a local repository
+    * Push = uploading from a local repository to a remote storage location
+    * Status = provides user with info of changed files and where they are ready to add or commit

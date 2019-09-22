@@ -1,0 +1,125 @@
+Week 2 curriculum
+
+RDBMS (Table, Row, Column, PK, FK, Referential Integrity, Anomalies, Multiplicity)
+    * Table = a container of data in the form of rows and columns.
+    * Row = one unit of data from within the table.
+    * Column = an attribute that a unit of data contains.
+    * PK = primary key = a column that contains a unique value in each row
+    * FK = foreign key = a key that points to a primary key in another table
+    * Anomalies
+        ** Update anomaly = unnecessary redundancy could lead to inconsistent data when updating.
+            redundant info is updated in some rows but not all.
+        ** Insertion anomaly = not possible to insert some data without also having some other data.
+            counterpart to deletion anomaly. if we don't have rows for certain data, we cannot represent other data at all.
+        ** Deletion anomaly = deleting some data can remove other data as a side effect.
+            if we delete a row representing some info, we may be deleting other data without realizing it.
+    * Multiplicity = the different kinds of relationships between tables
+        * 1-to-1 = both in same table or one FK between 2 tables
+        * 1-to-N (one to many) = two-tables FK
+        * N-to-N (many to many) = three tables, one join/junction table with 2 FKs
+
+Normalization (Dependency, Candidate Key, 1NF, 2NF, 3NF)
+    (https://github.com/1907-jul15-net/trainer-code/blob/master/2-sql/normalization-notes.txt)
+    process of reducing redundancy, improve referential integrity, to read/write with consistency remove insertion, update, and deletion anomalies.
+
+DML (Select, Insert, Update, Delete, Truncate)
+    * "Data Manipulation Language"
+      the set of SQL commands which operate on individual rows of tables.
+      "CRUD" - create read update delete, DML does CRUD on table rows.
+    * SELECT is for read access, for queries
+    * INSERT INTO adds a row to a table.
+    * UPDATE edits a row in a table.
+    * DELETE removes a row from a table.
+    * TRUNCATE removes all rows from a table.
+DDL (Create, Alter, Drop)
+    * Data Definition Language
+      we operate on whole tables (or columns) or other objects like functions.
+    * CREATE creates the table
+    * ALTER allows programmer to add or remove a column assuming column is not a primary key.
+    * DROP deletes the entire table assuming foreign keys are no longer pointing to another table's primary keys.
+
+JOIN (Inner-Join, Left-Join, Right-Join, Full-Join, Cross-Join, Self-Join)
+    * INNER JOIN selects all rows from both participating tables as long as there is a match between the columns.
+    * LEFT JOIN clause allows you to query data from multiple tables.
+      It returns all rows from the left table and the matching rows from the right table.
+      If no matching rows found in the right table, NULL are used.
+    * FULL JOIN (same as OUTER JOIN) returns all rows from both tables, matching up the rows wherever a match can be made and placing NULL in the places where no matching row exists.
+    * CROSS JOIN is used when you wish to create combination of every row from two tables.
+      The number of rows in your resulting cross join is equal to the product of the number of rows in each table.
+
+UNION (Union, Union-All, Intersect, Except)
+
+Subquery (CTE, Using-From, Using-Where)
+
+Aggregate (Average, Count, Sum, Min, Max)
+    * aggregate functions combine a whole sequence of values into one value.
+
+View (Schema-Binding)
+  * like computed tables
+    views support insert/update/delete, only on actual columns, not computed select-list stuff.
+    we can create views WITH SCHEMABINDING
+    this locks any underlying tables, and prevents any changes to their definition that would alter the view
+    we have temporary and table-valued variables
+    
+Function (Parameter, Scalar, Tabular)
+Stored Procedure (Variable, If-Else, Try-Catch, Throw, RaiseError, Print)
+Trigger (For, After, Instead-Of, Insert, Update, Delete)
+Transaction (Commit, Rollback, Savepoint)
+
+Isolation (Read-Uncommitted, Read-Committed, Repeatable-Read, Serializable)
+(https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/transaction-isolation-levels?view=sql-server-2017)
+    * Read-Uncommitted - No locks, allows dirty reads, nonrepeatable reads, and phantom reads.
+        Transactions are not isolated from each other.
+        If the DBMS supports other transaction isolation levels, it ignores whatever mechanism it uses to implement those levels.
+        So that they do not adversely affect other transactions, transactions running at the Read Uncommitted level are usually read-only.
+    * Read-Committed - Default, prevents dirty reads, but nonrepeatable reads and phantom reads can happen.
+        The transaction waits until rows write-locked by other transactions are unlocked; this prevents it from reading any "dirty" data.
+        The transaction holds a read lock (if it only reads the row) or write lock (if it updates or deletes the row) on the current row to prevent other transactions from updating or deleting it.
+        The transaction releases read locks when it moves off the current row.
+        It holds write locks until it is committed or rolled back.
+    * Repeatable-Read - Prevents dirty and nonrepeatable reads, but not phantom reads.
+        The transaction waits until rows write-locked by other transactions are unlocked; this prevents it from reading any "dirty" data.
+        Because other transactions cannot update or delete these rows, the current transaction avoids any nonrepeatable reads.
+        The transaction releases its locks when it is committed or rolled back.
+    * Serializable - Prevents dirty, nonrepeatable, and phantom reads.
+        The transaction waits until rows write-locked by other transactions are unlocked; this prevents it from reading any "dirty" data.
+        Because other transactions cannot update or delete the rows in the range, the current transaction avoids any nonrepeatable reads.
+        Because other transactions cannot insert any rows in the range, the current transaction avoids any phantoms.
+        The transaction releases its lock when it is committed or rolled back.
+
+Test Driven Development (Unit-Testing)
+
+ACID (Atomicity, Consistency, Isolation, Durability) All SQL Server commands are transactions in themselves.
+    A - Atomic - no partial effects, transactions succeed entirely or have no effect.
+    C - Consistent - constraints of the DB are not violated.
+    I - Isolated - transactions can't interfere with each other (we make compromises).
+    D - Durable - the effects must be written to persistant / non-volatile memory.
+
+Design Techniques (Repository-Pattern)
+
+ADO.NET (Connected-Architecture, Disconnected-Architecture, DataReader, DataAdapter, DataSet)
+(https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-architecture)
+    * ADO.NET is a data access technology from the Microsoft .NET Framework that provides communication between relational and non-relational systems through a common set of components.
+      ADO.NET is a set of computer software components that programmers can use to access data and data services from a database.
+      the classic way to connect SQL to .NET is with ADO.NET.
+      ADO.NET has classes in the System.Data namespace.
+      we need some NuGet package for the data provider (SQL Server).
+    * Connected-Architecture with ADO.NET
+      to connect to any data source from a code point of view: we use a connection string (get this from Azure Portal).
+      to avoid committing the login and password to public GitHub, it will be read from a ".gitignore" class.
+      connected architecture is faster when the DB is not congested with many connections (less overhead; no DataSet filling to do).
+    * Disconnected-Architecture
+      for the sake of performance when the DB is the bottleneck for an app, we minimize the time we spend connected to the DB and iterating over results.
+      in disconnected architecture, we don't work directly with the DataReader, instead, we use a DataAdapter to fill a DataSet with the results.
+      disconnected is faster overall when the bottleneck is those DB connections.
+    * DataReader provides a high-performance stream of data from the data source.
+      If you only need to read the results of a query, the DataReader is the better choice.
+    * DataAdapter provides the bridge between the DataSet object and the data source.
+      DataAdapter uses Command objects to execute SQL commands at the data source to both load the DataSet with data and reconcile changes that were made to the data in the DataSet back to the data source.
+    * DataSets contain DataTables with DataColumns and DataRows
+
+Entity Framework (ORM, Database-First Approach, DbContext, DbSet, LINQ, Deferred Execution, Tracking)
+Entity Framework is an ORM at the data access layer that is part of the ADO.NET framework and is installed from the NuGet package manager.
+    * ORM = object-relational mapper
+    * Database-First Approach = write the database first
+    DBContext is used by Entity Framework to query a database.

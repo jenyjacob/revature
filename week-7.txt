@@ -1,0 +1,89 @@
+Microservice Architecture
+
+resources:
+    https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/service-oriented-architecture
+    https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/microservices-architecture
+    https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/microservice-application-design
+    https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/media/image3.png
+    https://i.imgur.com/FCilO7Q.png
+    https://martinfowler.com/microservices/
+
+    each service
+        should not depend or know about each other
+        implements one business capability
+        we will develop and deploy these services independently of each other
+        we can scale independently as well
+            if one part of my application receives/needs more traffic than the other parts
+        every service has a way of storing its data and that way should be sovereign
+            owns its own data
+
+    advantages
+        long-term flexibility
+            what if the whole application needs to change or i don't need entity framework anymore?
+        cost savings from granular scaling
+            we only run the part of the application that we need at the moment
+        works well with agile and devops
+            we want to split up the users stories to be as independent as can be
+                this also prevents conflict
+
+    so, why data sovereignty?
+        many advantages (to having each service having its own database from each other service)
+            different data models for different needs
+                higher separation of concerns
+            flexibility to evolve data models
+            eliminate performance bottleneck of centralized DB
+                minimize the time you spend connected to that big database because being connected to big database is a large bottleneck
+        disadvantages
+            lost with losing one big DB
+                easy consistency
+                ACID transactions
+                we lose SQL across all data at once
+                    the whole point of SQL is to use this query language to bring a whole lot of data together from multiple tables
+        challenges
+            how to carve user stories into services
+                the way that we talk about the data is a clue about how we can carve up the user stories
+                    instead of referring to a customer as a customer, maybe refer to them as a guest or an order or some other narrow definition that you can view them as
+                    project 1: we could have broken it up into ordering service, catalog service, cart service
+            how to query data spread out
+                API gateway, aggregation service
+                    one way is to have the front-end talk to the API gateway
+            eventual consistency, communication between services
+                one (bad) way is with synchonous HTTP requests to the services
+                    this also results in waiting for a service to complete before moving onto the next one
+                publish/subscribe aka events
+                    ordering service publishes to event bus, event bus subscribes to catalog service
+            monitoring
+            scalability
+                how can you have multiple instances of your application running?
+            security
+
+an orchestrator 
+    the first program that pretty much got this working first is kubernates
+
+    a service is an abstraction of a container
+    service
+        n replicas of one image with rules for recovering from errors, ingress load balancing
+        inside the service is copies of the same container
+    a stack is a bunch of services that can be taken up or down as a group
+    a swarm (cluster) is a group of nodes (computers) connected by docker to run stacks
+    a node is one machine (pc/vm) in a swarm
+        two kinds of nodes:
+            manager
+                send the commands to such as deploy or remove the stack
+            worker
+                implements based on commands given to manager
+    volumes share environment variables between containers
+    the environment section is where you add environment variables using either an array or dictionary
+
+    docker is for running containers in services
+    The Compose file is a YAML file defining services, networks and volumes.
+
+    command-line commands:
+        docker compose -build
+        docker swarm init
+        docker stack deploy -c docker-compose.yaml
+        docker stack services
+        docker ps
+        docker service logs
+
+Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.[1] Typical applications include remote command-line, login, and remote command execution, but any network service can be secured with SSH.
