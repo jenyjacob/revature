@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PizzaStore.WebUI.Models.StoreViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List Of Stores</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreLoc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreLoc)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
